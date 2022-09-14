@@ -25,7 +25,7 @@ public class BaseDao {
         }
         driver = properties.getProperty("driver");
         url = properties.getProperty("url");
-        username = properties.getProperty("driver");
+        username = properties.getProperty("username");
         password = properties.getProperty("password");
     }
 
@@ -47,8 +47,8 @@ public class BaseDao {
     }
 
     //编写查询公共方法
-    public static ResultSet executeQuery(Connection connection,String sql,Object[] objects) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    public static ResultSet executeQuery(Connection connection,PreparedStatement preparedStatement,String sql,Object[] objects) throws SQLException {
+        connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {
             preparedStatement.setObject(i+1,objects[i]);
         }
@@ -56,8 +56,8 @@ public class BaseDao {
     }
 
     //编写曾删改公共方法
-    public static int executeUpdate(Connection connection,String sql,Object[] objects) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    public static int executeUpdate(Connection connection,PreparedStatement preparedStatement,String sql,Object[] objects) throws SQLException {
+        connection.prepareStatement(sql);
         for (int i = 0; i < objects.length; i++) {
             preparedStatement.setObject(i+1,objects[i]);
         }
