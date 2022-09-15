@@ -6,4 +6,6 @@ import java.sql.SQLException;
 
 public interface UserService {
     public User login(String userCode, String userPassword) throws SQLException;
+
+    public boolean updatePwd(String userCode, String newPassword);
 }

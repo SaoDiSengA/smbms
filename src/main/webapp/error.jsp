@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-你要访问的页面，已经飞往火星！
-<a href="javascript:window.history.back(-1);">返回</a>
+<h1>请登录后再访问该页面！</h1>
+<a href="login.jsp">返回</a>
 </body>
 </html>

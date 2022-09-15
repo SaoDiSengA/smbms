@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDaoImpl implements  UserDao{
+
     public User getLoginUser(String userCode) {
         User user = null;
         String sql = "select * from smbms_user where userCode = ?";
@@ -43,4 +44,28 @@ public class UserDaoImpl implements  UserDao{
         }
         return user;
     }
+
+    public boolean updatePwd(Connection connection,String userCode, String newPassword) {
+        boolean flag = false;
+        String sql = "update smbms_user set userPassword = ? where userCode = ?";
+        PreparedStatement preparedStatement = null;
+        if (null != connection){
+            try {
+                preparedStatement = connection.prepareStatement(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Object[] params = {newPassword,userCode};
+            try {
+                int i = BaseDao.executeUpdate(connection, preparedStatement, sql, params);
+                flag = true;
+                BaseDao.closeResources(null,preparedStatement,null);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return flag;
+    }
+
+
 }

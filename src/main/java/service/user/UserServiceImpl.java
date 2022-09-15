@@ -1,10 +1,12 @@
 package service.user;
 
+import dao.BaseDao;
 import dao.user.UserDao;
 import dao.user.UserDaoImpl;
 import org.junit.Test;
 import pojo.User;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService{
@@ -24,11 +26,18 @@ public class UserServiceImpl implements UserService{
         return loginUser;
     }
 
+    public boolean updatePwd(String userCode, String newPassword) {
+        Connection connection = BaseDao.getConnection();
+        boolean b = userDao.updatePwd(connection, userCode, newPassword);
+        BaseDao.closeResources(connection,null,null);
+        return b;
+    }
+
     @Test
     public void test() {
         UserServiceImpl userService = new UserServiceImpl();
-        User admin = userService.login("admin", "1234567");
-        System.out.println(admin.getAddress());
+        boolean admin = userService.updatePwd("admin", "11111111");
+        System.out.println(admin);
 
     }
 }
