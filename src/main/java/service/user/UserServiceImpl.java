@@ -7,7 +7,6 @@ import org.junit.Test;
 import pojo.User;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService{
     //注入

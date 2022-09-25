@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.mapper.TeacherMapper">
+    <select id="getTeacher" parameterType="_int" resultMap="TeacherStudent">
+        select t.name tname,t.id tid,s.id sid,s.name sname
+        from smbms.student s , smbms.teacher t
+        where s.tid = t.id and t.id = #{tid}
+    </select>
+    <resultMap id="TeacherStudent" type="com.tao.pojo.Teacher">
+        <result property="name" column="tname"/>
+        <collection property="students" ofType="com.tao.pojo.Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+            <association property="teacher" javaType="com.tao.pojo.Teacher">
+                <result property="name" column="tname"/>
+            </association>
+        </collection>
+    </resultMap>
+</mapper>

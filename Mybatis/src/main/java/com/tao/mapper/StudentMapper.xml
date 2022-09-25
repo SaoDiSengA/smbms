@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.mapper.StudentMapper">
+<!--    <select id="getStudents" resultMap="StudentTeacher">-->
+<!--        select * from student-->
+<!--    </select>-->
+<!--    <resultMap id="StudentTeacher" type="com.tao.pojo.Student">-->
+<!--        &lt;!&ndash;association关联属性 property属性名 javaType属性类型 column在多 的一方的表中的列名&ndash;&gt;-->
+<!--        <association property="teacher" column="tid" javaType="com.tao.pojo.Teacher" select="getTeacher"/>-->
+<!--    </resultMap>-->
+<!--    <select id="getTeacher" resultType="com.tao.pojo.Teacher">-->
+<!--        select * from teacher where id = #{tid}-->
+<!--    </select>-->
+
+    <select id="getStudents" resultMap="StudentTeacher">
+        select s.id as sid,s.name as sname,t.name as tname
+        from smbms.student as s,smbms.teacher as t
+        where s.tid = t.id
+    </select>
+    <resultMap id="StudentTeacher" type="com.tao.pojo.Student">
+        <id property="id" column="sid" />
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="com.tao.pojo.Teacher">
+            <result property="name" column="tname"/>
+        </association>
+    </resultMap>
+</mapper>
